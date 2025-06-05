@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="edit-order-page">
+  <h2>Редактировать заказ №{{ form.instance.id }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+  </form>
+  <a href="{% url 'admin_orders' %}">Назад к заказам</a>
+</div>
+{% endblock %}
+

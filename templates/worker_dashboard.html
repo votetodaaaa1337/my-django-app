@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="worker-orders">
+    <div class="section-content">
+        <h2>Назначенные заказы</h2>
+        {% if orders %}
+            <div class="orders-list">
+                {% for order in orders %}
+                    <div class="order-item">
+                        <div class="order-details">
+                            <p class="order-info">ФИО: {{ order.full_name }}</p>
+                            <p class="order-info">Телефон: {{ order.phone_number }}</p>
+                            <p class="order-info">Адрес: {{ order.address }}</p>
+                            <p class="service-title"><strong>{{ order.service.title }}</strong> — Статус: <span class="status-{{ order.status|lower }}">{{ order.get_status_display }}</span></p>
+                        </div>
+                        <a href="{% url 'update_order' order.id %}" class="btn secondary">Обновить</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <p>Пока нет заказов</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

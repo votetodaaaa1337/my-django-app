@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="admin-dashboard">
+        {% if role == 'admin' %}
+            <h2>Добро пожаловать, Администратор!</h2>
+            <ul>
+                <li><a href="{% url 'admin_orders' %}">📦 Все заказы</a></li>
+                <li><a href="{% url 'admin_users' %}">👥 Все пользователи</a></li>
+                <li><a href="{% url 'admin_services' %}">🛠️ Все услуги</a></li>
+            </ul>
+        {% endif %}
+    </section>
+{% endblock %}

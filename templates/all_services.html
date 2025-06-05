@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+ <div class="all-services-page">
+  <h2>Все услуги</h2>
+
+ <div class="add-button-container">
+   <a href="{% url 'add_service' %}" class="btn btn-primary">➕ Добавить услугу</a>
+ </div>
+
+  <ul>
+    {% for service in services %}
+      <li>
+       {{ service.title }} —
+       <span class="service-title">{{ service.title }}</span> —
+        <a href="{% url 'edit_service' service.id %}">✏️</a>
+        <a href="{% url 'delete_service' service.id %}">🗑️</a>
+      </li>
+    {% empty %}
+     <li class="empty-state-item">Нет услуг</li>
+    {% endfor %}
+  </ul>
+ </div>
+{% endblock %}

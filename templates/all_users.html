@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="all-users-page">
+<h2>Все пользователи</h2>
+
+<div class="create-button-container">
+    <a href="{% url 'create_user' %}" class="btn btn-primary">Создать пользователя</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя пользователя</th>
+            <th>Email</th>
+            <th>Роль</th>
+            <th>Активен</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td data-label="ID">{{ user.id }}</td>
+            <td data-label="Имя пользователя">{{ user.username }}</td>
+            <td data-label="Email">{{ user.email }}</td>
+            <td data-label="Роль">{{ user.role }}</td>
+            <td data-label="Активен">{% if user.is_active %}Да{% else %}Нет{% endif %}</td>
+            <td data-label="Действия">
+                <a href="{% url 'user_detail' user.id %}">Просмотр</a> |
+                <a href="{% url 'edit_user' user.id %}">Редактировать</a> |
+                <a href="{% url 'delete_user' user.id %}">Удалить</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr class="empty-state-row"><td colspan="6">Пользователи не найдены.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

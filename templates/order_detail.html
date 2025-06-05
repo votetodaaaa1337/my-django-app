@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="order-detail">
+    <div class="section-content">
+        <h2>Детали заказа</h2>
+        <div class="order-card">
+            <h3>{{ order.service.title }}</h3>
+            <div class="order-info">
+                <p>
+                    <span class="info-label">ФИО:</span>
+                    <span class="info-value">{{ order.full_name }}</span>
+                </p>
+                <p>
+                    <span class="info-label">Телефон:</span>
+                    <span class="info-value">{{ order.phone_number }}</span>
+                </p>
+                <p>
+                    <span class="info-label">Адрес:</span>
+                    <span class="info-value">{{ order.address }}</span>
+                </p>
+                <p>
+                    <span class="info-label">Статус:</span>
+                    <span class="info-value">
+                        <span class="status status-{{ order.status|lower }}">{{ order.get_status_display }}</span>
+                    </span>
+                </p>
+                <p>
+                    <span class="info-label">Дата заказа:</span>
+                    <span class="info-value">{{ order.created_at|date:"d.m.Y H:i" }}</span>
+                </p>
+                <p>
+                    <span class="info-label">Описание услуги:</span>
+                    <span class="info-value">{{ order.service.description }}</span>
+                </p>
+                <p>
+                    <span class="info-label">Цена:</span>
+                    <span class="info-value">{{ order.service.price }} ₽</span>
+                </p>
+            </div>
+            <a href="{% url 'my_orders' %}" class="btn">Назад к моим заказам</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>FAVORITSTROY</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <div class="header-content-wrapper">
+        <img src="{% static 'images/logo.svg' %}" alt="FAVORITSTROY" width="150" height="auto">
+        <nav>
+            <a href="/">Главная</a>
+
+            {% if user.is_authenticated %}
+                {% if user.role == 'client' %}
+                    <a href="{% url 'services_list' %}">Услуги</a>
+                    <a href="{% url 'my_orders' %}">Мои заказы</a>
+                {% elif user.role == 'worker' %}
+                    <a href="{% url 'worker_orders' %}">Мои задания</a>
+                    <a href="{% url 'available_orders' %}">Доступные заказы</a>
+                {% elif user.is_superuser %}
+                    <a href="/admin/">Админка</a>
+                {% endif %}
+                <a href="{% url 'logout' %}">Выход</a>
+                <span> | Вы вошли как: {{ user.username }}</span>
+            {% else %}
+                <a href="{% url 'login' %}">Войти</a>
+                <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>FAVORITSTROY</h3>
+            <div class="contact-info">
+                <p>Адрес: г. Чита, с. Смоленка, ул. Малиновая, д. 36б</p>
+                <p>Email: info@favoritstroy.ru</p>
+                <p>Телефон: +7 (994) 072-50-33</p>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Навигация</h3>
+            <a href="/">Главная</a>
+            <a href="{% url 'services_list' %}">Услуги</a>
+            {% if user.is_authenticated %}
+                {% if user.role == 'client' %}
+                    <a href="{% url 'my_orders' %}">Мои заказы</a>
+                {% elif user.role == 'worker' %}
+                    <a href="{% url 'worker_orders' %}">Мои задания</a>
+                    <a href="{% url 'available_orders' %}">Доступные заказы</a>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'login' %}">Войти</a>
+                <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+        </div>
+        <div class="footer-section">
+            <h3>О нас</h3>
+            <a href="{% url 'about' %}">О компании</a>
+            <a href="{% url 'contacts' %}">Контакты</a>
+        </div>
+    </div>
+</footer>

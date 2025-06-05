@@ -1,0 +1,17 @@
+<h1>Доступные заявки на строительство</h1>
+
+{% if requests %}
+  <ul>
+    {% for req in requests %}
+      <li>
+        {{ req.service_type }} — {{ req.status }}
+        <form method="post" action="{% url 'accept_construction_request' req.id %}">
+          {% csrf_token %}
+          <button type="submit">Принять заявку</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Нет доступных заявок</p>
+{% endif %}

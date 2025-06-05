@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="register">
+    <div class="section-content">
+        <h2>Регистрация</h2>
+        <div class="form-card">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_username">Имя пользователя:</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                    <div class="errorlist">
+                        {% for error in form.username.errors %}
+                        <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_password1">Пароль:</label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                    <div class="errorlist">
+                        {% for error in form.password1.errors %}
+                        <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if form.password1.help_text %}
+                    <div class="helptext">{{ form.password1.help_text }}</div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_password2">Подтверждение пароля:</label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                    <div class="errorlist">
+                        {% for error in form.password2.errors %}
+                        <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if form.password2.help_text %}
+                    <div class="helptext">{{ form.password2.help_text }}</div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="id_role">Роль:</label>
+                    <div class="select-wrapper">
+                        <select name="role" id="id_role" class="styled-select">
+                            <option value="">Выберите роль</option>
+                            <option value="client">Клиент</option>
+                            <option value="worker">Работник</option>
+                        </select>
+                        <div class="select-arrow"></div>
+                    </div>
+                    {% if form.role.errors %}
+                    <div class="errorlist">
+                        {% for error in form.role.errors %}
+                        <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

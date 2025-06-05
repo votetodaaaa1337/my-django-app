@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Заказ №{{ order.id }} - {{ order.service.title }}</h2>
+
+<h3>Информация о клиенте</h3>
+<p>ФИО: {{ order.full_name }}</p>
+<p>Телефон: {{ order.phone_number }}</p>
+<p>Адрес: {{ order.address }}</p>
+
+<a href="{% url 'worker_orders' %}">Назад к заказам</a>
+{% endblock %}

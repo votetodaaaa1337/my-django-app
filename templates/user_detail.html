@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Пользователь: {{ user.username }}</h2>
+
+<ul>
+    <li>ID: {{ user.id }}</li>
+    <li>Имя пользователя: {{ user.username }}</li>
+    <li>Email: {{ user.email }}</li>
+    <li>Роль: {{ user.role }}</li>
+    <li>Активен: {% if user.is_active %}Да{% else %}Нет{% endif %}</li>
+    <li>Имя: {{ user.first_name }}</li>
+    <li>Фамилия: {{ user.last_name }}</li>
+</ul>
+
+<a href="{% url 'edit_user' user.id %}">Редактировать</a> |
+<a href="{% url 'admin_users' %}">Назад к списку</a>
+{% endblock %}

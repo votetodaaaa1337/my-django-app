@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="edit-service-page">
+    <h2>Редактировать услугу</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="title" value="{{ service.title }}" placeholder="Название"><br>
+    <textarea name="description" placeholder="Описание">{{ service.description }}</textarea><br>
+    <input type="text" name="price" value="{{ service.price }}" placeholder="Цена"><br>
+    <input type="file" name="image"><br>
+    <button type="submit">Сохранить</button>
+</form>
+  </div>
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="update-order-page">
+    <h2>Обновление заказа: {{ order.service.title }}</h2>
+    <form method="post">
+      {% csrf_token %}
+      <p>
+        <label for="status">Статус:</label>
+        <select name="status" id="status">
+          <option value="in_progress" {% if order.status == 'in_progress' %}selected{% endif %}>В процессе</option>
+          <option value="completed" {% if order.status == 'completed' %}selected{% endif %}>Завершен</option>
+        </select>
+      </p>
+      <p>
+        <label for="notes">Комментарий:</label>
+        <textarea name="notes" id="notes" rows="4">{{ order.progress_notes }}</textarea>
+      </p>
+      <button type="submit">Сохранить</button>
+    </form>
+  </div>
+{% endblock %}

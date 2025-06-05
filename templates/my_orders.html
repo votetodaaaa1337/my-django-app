@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="my-orders">
+    <h2>Мои заказы на услуги</h2>
+    {% if orders %}
+        <ul class="orders-list">
+            {% for order in orders %}
+                <li class="order-item">
+                    <div class="order-info">
+                        <div class="order-title">{{ order.service.title}}</div>
+                        <div class="order-status status-{{ order.status|lower }}">
+                            {{ order.get_status_display }}
+                        </div>
+                    </div>
+                    <div class="order-actions">
+                        <a href="{% url 'order_detail' order.id %}" class="order-link">Подробнее</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="empty-message">
+            <p>Нет заказов на услуги.</p>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

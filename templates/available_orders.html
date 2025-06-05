@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    
+<section class="available-orders">
+    <div class="section-content">
+        <h2>Доступные заказы</h2>
+        {% if orders %}
+            <div class="orders-grid">
+                {% for order in orders %}
+                    <div class="order-card">
+                        <h3>Заказ №{{ order.id }}</h3>
+                        <p><strong>Услуга:</strong> {{ order.service.title }}</p>
+                        <p class="status">Статус: <span class="status-{{ order.status|lower }}">{{ order.get_status_display }}</span></p>
+                        <form method="post" action="{% url 'accept_order' order.id %}" class="accept-form">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Принять заказ</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <p>Нет доступных заказов.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
