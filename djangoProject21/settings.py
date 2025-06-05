@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-r73_6^_xx&=n3amcvj*897ndc9&+4w1-#y33(wusb-@z$68^l@
 DEBUG = True
 
 import os
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+ALLOWED_HOSTS = ['*']  # Временно для тестов; замените на ваш домен, например, ['your-app.onrender.com']
+
+# Настройки для продакшена
+DEBUG = False  # Отключите DEBUG в продакшене
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')  # Храните секретный ключ в переменных окружения
 
 # Application definition
 
@@ -125,11 +129,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+# Убедитесь, что эти настройки тоже присутствуют
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
