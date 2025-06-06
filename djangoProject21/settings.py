@@ -24,12 +24,7 @@ SECRET_KEY = 'django-insecure-r73_6^_xx&=n3amcvj*897ndc9&+4w1-#y33(wusb-@z$68^l@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-import os
-ALLOWED_HOSTS = ['*']  # Временно для тестов; замените на ваш домен, например, ['your-app.onrender.com']
-
-# Настройки для продакшена
-DEBUG = False  # Отключите DEBUG в продакшене
-SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')  # Храните секретный ключ в переменных окружения
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -54,11 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'djangoProject21.urls'
 
@@ -85,9 +76,11 @@ WSGI_APPLICATION = 'djangoProject21.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-import dj_database_url
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # Password validation
@@ -124,16 +117,21 @@ USE_TZ = True
 
 import os
 
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-# Убедитесь, что эти настройки тоже присутствуют
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
