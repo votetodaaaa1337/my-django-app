@@ -1,19 +1,10 @@
 services:
   - type: web
-    name: your_django_app_name
+    name: my-django-app
     env: python
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn your_django_app_name.wsgi:application"
+    buildCommand: "./manage.py collectstatic --noinput"
+    startCommand: "gunicorn djangoProject21.wsgi:application"
+    staticPublishPath: staticfiles
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.10
-      - key: ALLOWED_HOSTS
-        value: your_django_app_name.onrender.com
-      - key: DATABASE_URL
-        sync: false
-      - key: DJANGO_SECRET_KEY
-        sync: false
-databases:
-  - name: your_database_name
-    databaseName: your_database_name
-    user: your_database_user
+      - key: DJANGO_SETTINGS_MODULE
+        value: djangoProject21.settings
