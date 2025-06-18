@@ -12,7 +12,7 @@ class OrderForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'role', 'is_active']
+        fields = ['username', 'role', 'is_active']
 
 
 def create_user(request):
