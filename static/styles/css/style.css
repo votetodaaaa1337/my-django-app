@@ -377,10 +377,72 @@ tr:hover {
     opacity: 0.9;
 }
 
-.about {
-    padding: 5rem 2rem;
-    background: var(--white);
+.about-page {
+    max-width: 900px;
+    margin: 3rem auto 5rem;
+    padding: 0 1rem;
+    font-family: Arial, sans-serif; /* замените на ваш шрифт */
+    color: #333333;
 }
+
+.about-page h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50; /* основной цвет */
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.about-page h2::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 4px;
+    background: #e67e22; /* акцентный цвет */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+}
+
+.about-text-block p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    color: #555555;
+}
+
+#map_803643575 {
+    margin-top: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    height: 600px;
+    border: none;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 600px) {
+    .about-page {
+        margin: 2rem 1rem 3rem;
+    }
+
+    .about-page h2 {
+        font-size: 1.8rem;
+    }
+
+    .about-text-block p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    #map_803643575 {
+        height: 400px;
+    }
+}
+
 
 .section-content {
     max-width: 1200px;
@@ -2791,8 +2853,6 @@ tr:hover {
     }
 }
 
-
-/* Contacts Page Styles */
 .contacts-page {
     padding: 2rem;
     max-width: 800px; /* Consistent width for content pages */

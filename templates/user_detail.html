@@ -1,18 +1,96 @@
 {% extends 'base.html' %}
 
+{% block extra_css %}
+<style>
+.user-profile {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    font-family: var(--font-family);
+    color: var(--text-color);
+}
+
+.user-profile h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    text-align: center;
+}
+
+.user-profile h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--secondary-color);
+    border-radius: 3px;
+}
+
+.user-profile ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.user-profile ul li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1.1rem;
+}
+
+.user-profile ul li:last-child {
+    border-bottom: none;
+}
+
+.user-profile a {
+    display: inline-block;
+    margin-right: 1.5rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.user-profile a:hover {
+    color: var(--primary-color);
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 480px) {
+    .user-profile {
+        padding: 1.5rem 1rem;
+    }
+
+    .user-profile h2 {
+        font-size: 1.5rem;
+    }
+
+    .user-profile ul li {
+        font-size: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
 {% block content %}
-<h2>Пользователь: {{ user.username }}</h2>
+<div class="user-profile">
+  <h2>Пользователь: {{ user.username }}</h2>
 
-<ul>
-    <li>ID: {{ user.id }}</li>
-    <li>Имя пользователя: {{ user.username }}</li>
-    <li>Email: {{ user.email }}</li>
-    <li>Роль: {{ user.role }}</li>
-    <li>Активен: {% if user.is_active %}Да{% else %}Нет{% endif %}</li>
-    <li>Имя: {{ user.first_name }}</li>
-    <li>Фамилия: {{ user.last_name }}</li>
-</ul>
-
-<a href="{% url 'edit_user' user.id %}">Редактировать</a> |
-<a href="{% url 'admin_users' %}">Назад к списку</a>
+  <ul>
+      <h3>ID:</h3> {{ user.id }}
+      <h3>Имя пользователя:</h3> {{ user.username }}
+      <h3>Роль:</h3> {{ user.role }}
+      <h3>Активен:</h3> {% if user.is_active %}Да{% else %}Нет{% endif %}
+  </ul>
+    <br>
+  <a href="{% url 'admin_users' %}">Назад к списку</a>
+</div>
 {% endblock %}

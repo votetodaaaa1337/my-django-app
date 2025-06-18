@@ -1,15 +1,42 @@
 {% extends 'base.html' %}
+
+{% block extra_css %}
+<style>
+.back-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.back-link:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+</style>
+{% endblock %}
+
 {% block content %}
   <div class="edit-service-page">
     <h2>Редактировать услугу</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="text" name="title" value="{{ service.title }}" placeholder="Название"><br>
-    <textarea name="description" placeholder="Описание">{{ service.description }}</textarea><br>
-    <input type="text" name="price" value="{{ service.price }}" placeholder="Цена"><br>
-    <input type="file" name="image"><br>
-    <button type="submit">Сохранить</button>
-</form>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="text" name="title" value="{{ service.title }}" placeholder="Название"><br>
+      <textarea name="description" placeholder="Описание">{{ service.description }}</textarea><br>
+      <input type="text" name="price" value="{{ service.price }}" placeholder="Цена"><br>
+      <input type="file" name="image"><br>
+      <label for="category">Категория услуги:</label>
+      <select name="category" id="category">
+        {% for key, value in categories %}
+          <option value="{{ key }}" {% if service.category == key %}selected{% endif %}>{{ value }}</option>
+        {% endfor %}
+      </select>
+      <br>
+      <button type="submit">Сохранить</button>
+    </form>
+
+    <a href="{% url 'admin_services' %}" class="back-link">← Назад к услугам</a>
   </div>
 {% endblock %}
-

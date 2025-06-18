@@ -105,12 +105,14 @@ def all_services(request):
 from decimal import Decimal, InvalidOperation
 
 @user_passes_test(is_admin)
+@user_passes_test(is_admin)
 def add_service(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
         price_input = request.POST.get('price')
         image = request.FILES.get('image')
+        category = request.POST.get('category', 'repair')
 
         try:
             price = Decimal(price_input.replace(',', '.')) if price_input else Decimal('0')
@@ -122,10 +124,12 @@ def add_service(request):
                 title=title,
                 description=description,
                 price=price,
-                image=image
+                image=image,
+                category=category,
             )
             return redirect('admin_services')
-    return render(request, 'add_service.html')
+    return render(request, 'add_service.html', {'categories': Service.CATEGORY_CHOICES})
+
 
 
 from decimal import Decimal, InvalidOperation
@@ -133,13 +137,15 @@ from django.contrib.auth.decorators import user_passes_test
 
 
 @user_passes_test(is_admin)
+@user_passes_test(is_admin)
 def edit_service(request, service_id):
     service = get_object_or_404(Service, id=service_id)
     if request.method == 'POST':
         service.title = request.POST.get('title')
         service.description = request.POST.get('description')
-
         price_input = request.POST.get('price')
+        category = request.POST.get('category', 'repair')
+
         try:
             service.price = Decimal(price_input.replace(',', '.')) if price_input else Decimal('0')
         except (InvalidOperation, AttributeError):
@@ -148,10 +154,12 @@ def edit_service(request, service_id):
         if 'image' in request.FILES:
             service.image = request.FILES['image']
 
+        service.category = category
         service.save()
         return redirect('admin_services')
 
-    return render(request, 'edit_service.html', {'service': service})
+    return render(request, 'edit_service.html', {'service': service, 'categories': Service.CATEGORY_CHOICES})
+
 
 
 def delete_service(request, service_id):

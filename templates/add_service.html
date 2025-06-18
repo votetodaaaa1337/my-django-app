@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="add-service-page">
-  <h2>Добавить услугу</h2>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input type="text" name="title" placeholder="Название"><br>
-  <textarea name="description" placeholder="Описание"></textarea><br>
-  <input type="text" name="price" placeholder="Цена"><br>
-  <input type="file" name="image"><br>
-  <button type="submit">Добавить</button>
-</form>
+    <div class="add-service-page">
+        <h2>Добавить услугу</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="title" placeholder="Название"><br>
+            <textarea name="description" placeholder="Описание"></textarea><br>
+            <input type="text" name="price" placeholder="Цена"><br>
+            <input type="file" name="image"><br>
+            <label for="category">Категория:</label><br>
+            <select name="category">
+                {% for key, label in categories %}
+                    <option value="{{ key }}">{{ label }}</option>
+                {% endfor %}
+            </select><br><br>
+            <button type="submit">Добавить</button>
+        </form>
 
-</div>
+    </div>
 {% endblock %}

@@ -2466,6 +2466,38 @@ tr:hover {
     box-shadow: var(--shadow);
 }
 
+/* Стили для заголовков категорий (h3) */
+.services-list h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.3rem;
+    text-align: left;
+    max-width: fit-content;
+}
+
+/* Подчёркивание под заголовком категории */
+.services-list h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--secondary-color);
+    border-radius: 2px;
+}
+
+/* Чтобы отступ был сбоку, если заголовок слишком длинный */
+@media (max-width: 768px) {
+    .services-list h3 {
+        font-size: 1.3rem;
+        margin-top: 2rem;
+    }
+}
+
 /* Responsive Adjustments for All Services Page */
 @media (max-width: 768px) {
     .all-services-page {
@@ -2791,8 +2823,6 @@ tr:hover {
     }
 }
 
-
-/* Contacts Page Styles */
 .contacts-page {
     padding: 2rem;
     max-width: 800px; /* Consistent width for content pages */
@@ -2800,157 +2830,145 @@ tr:hover {
 }
 
 
-/* About Us Page Styles */
 .about-page {
-    padding: 2rem;
-    max-width: 800px; /* Consistent width for content pages */
-    margin: 0 auto;
-}
-
-.about-page .section-content {
-    /* Inherits styles from .section-content */
-    text-align: center; /* Center content within the section */
+    max-width: 900px;
+    margin: 3rem auto 5rem;
+    padding: 0 1rem;
+    font-family: Arial, sans-serif; /* замените на ваш шрифт */
+    color: #333333;
 }
 
 .about-page h2 {
-    color: var(--primary-color);
-    font-size: 2.5rem; /* Larger font size for main section headers */
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50; /* основной цвет */
     margin-bottom: 2rem;
     position: relative;
-    display: inline-block;
+    padding-bottom: 0.5rem;
 }
 
 .about-page h2::after {
     content: '';
     position: absolute;
-    bottom: -10px; /* Adjust position */
+    width: 80px;
+    height: 4px;
+    background: #e67e22; /* акцентный цвет */
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px; /* Wider underline for section headers */
-    height: 3px;
-    background: var(--secondary-color);
+    border-radius: 3px;
 }
 
-.about-page .about-text-block {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    margin-top: 3rem; /* Space from heading */
-    text-align: left; /* Align text left within the block */
+.about-text-block p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    color: #555555;
 }
 
-.about-page .about-text-block p {
-    margin-bottom: 1rem;
-    color: var(--text-color);
-    font-size: 1.1rem;
-    line-height: 1.6;
+#map_803643575 {
+    margin-top: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    height: 600px;
+    border: none;
 }
 
-/* Responsive Adjustments for About Us Page */
-@media (max-width: 768px) {
+/* Адаптив для мобильных */
+@media (max-width: 600px) {
     .about-page {
-        padding: 1rem;
+        margin: 2rem 1rem 3rem;
     }
 
     .about-page h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
-    .about-page .about-text-block {
-        padding: 1.5rem;
-    }
-
-    .about-page .about-text-block p {
+    .about-text-block p {
         font-size: 1rem;
-        margin-bottom: 0.8rem;
+        line-height: 1.5;
+    }
+
+    #map_803643575 {
+        height: 400px;
     }
 }
 
-/* Contacts Page Styles */
-.contacts-page {
-    padding: 2rem;
-    max-width: 800px; /* Consistent width for content pages */
-    margin: 0 auto;
-}
 
-.contacts-page .section-content {
-    /* Inherits styles from .section-content */
-    text-align: center; /* Center content within the section */
+.contacts-page {
+    max-width: 900px;
+    margin: 3rem auto 5rem;
+    padding: 0 1rem;
+    font-family: Arial, sans-serif;
+    color: #333;
 }
 
 .contacts-page h2 {
-    color: var(--primary-color);
-    font-size: 2.5rem; /* Larger font size for main section headers */
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
     margin-bottom: 2rem;
     position: relative;
-    display: inline-block;
+    padding-bottom: 0.5rem;
 }
 
 .contacts-page h2::after {
     content: '';
     position: absolute;
-    bottom: -10px; /* Adjust position */
+    width: 80px;
+    height: 4px;
+    background: #e67e22;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px; /* Wider underline for section headers */
-    height: 3px;
-    background: var(--secondary-color);
+    border-radius: 3px;
 }
 
-.contacts-page .contact-info-block {
-    background: var(--white);
-    padding: 2rem;
+.contact-info-block {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #555;
+    background: #f9f9f9;
+    padding: 1.8rem 2rem;
     border-radius: 10px;
-    box-shadow: var(--shadow);
-    margin-top: 3rem; /* Space from heading */
-    text-align: left; /* Align text left within the block */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 3rem;
 }
 
-.contacts-page .contact-info-block p {
-    margin-bottom: 1rem;
-    color: var(--text-color);
-    font-size: 1.1rem;
-    line-height: 1.6;
+.contact-info-block p {
+    margin: 0.6rem 0;
 }
 
-.contacts-page .contact-info-block p strong {
-    color: var(--primary-color);
-    font-weight: 600;
-    display: inline-block;
-    min-width: 120px; /* Align labels */
-    margin-right: 0.8rem;
+#map_803643575 {
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: none;
 }
 
-/* Responsive Adjustments for Contacts Page */
-@media (max-width: 768px) {
+/* Адаптив */
+@media (max-width: 600px) {
     .contacts-page {
-        padding: 1rem;
+        margin: 2rem 1rem 3rem;
     }
 
     .contacts-page h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
-    .contacts-page .contact-info-block {
-        padding: 1.5rem;
-    }
-
-    .contacts-page .contact-info-block p {
+    .contact-info-block {
         font-size: 1rem;
-        margin-bottom: 0.8rem;
+        padding: 1.2rem 1.5rem;
     }
 
-    .contacts-page .contact-info-block p strong {
-        display: block; /* Stack label and value */
-        min-width: auto;
-        margin-right: 0;
-        margin-bottom: 0.2rem;
+    #map_803643575 {
+        height: 350px;
     }
 }
 
-/* Add Service Page Styles */
-/* Add/Edit Service Page Styles */
 .add-service-page,
 .edit-service-page {
     padding: 2rem;

@@ -4,6 +4,7 @@
 <section class="services-list">
     <div class="section-content">
         <h2>Наши строительные услуги</h2>
+
         <form method="get" class="search-form">
             <div class="filter-group">
                 <input type="text" name="q" placeholder="Поиск по названию или описанию" value="{{ query }}" class="filter-input">
@@ -16,26 +17,27 @@
             </div>
             <button type="submit" class="filter-button">Искать</button>
         </form>
-        <div class="services-grid">
-            {% for service in services %}
-                <div class="service-card">
-                    <h3>{{ service.title }}</h3>
-                    {% if service.image %}
-                        <img src="{{ service.image.url }}" alt="{{ service.title }}" class="service-image"/>
-                    {% endif %}
-                    <p class="description">{{ service.description }}</p>
-                    <p class="price">Цена: {{ service.price }} ₽</p>
-                    {% if user.is_authenticated and user.role == 'client' %}
-                        <a href="{% url 'order_create' service.id %}" class="btn btn-primary">Заказать</a>
-                    {% endif %}
-                </div>
-            {% endfor %}
-            {% if not services %}
-                <div class="empty-state">
-                    <p>Услуги не найдены. Попробуйте изменить параметры поиска.</p>
-                </div>
-            {% endif %}
-        </div>
+
+        {% for category_label, services in services_by_category %}
+            <h3>{{ category_label }}</h3>
+            <div class="services-grid">
+                {% for service in services %}
+                    <div class="service-card">
+                        <h4>{{ service.title }}</h4>
+                        {% if service.image %}
+                            <img src="{{ service.image.url }}" alt="{{ service.title }}" class="service-image"/>
+                        {% endif %}
+                        <p class="description">{{ service.description }}</p>
+                        <p class="price">Цена: {{ service.price }} ₽</p>
+                        {% if user.is_authenticated and user.role == 'client' %}
+                            <a href="{% url 'order_create' service.id %}" class="btn btn-primary">Заказать</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% empty %}
+            <p>Услуги не найдены.</p>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

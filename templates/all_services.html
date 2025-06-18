@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
+{% block extra_css %}
+
+{% endblock %}
+
 {% block content %}
  <div class="all-services-page">
   <h2>Все услуги</h2>
 
- <div class="add-button-container">
+
+  <div class="add-button-container">
    <a href="{% url 'add_service' %}" class="btn btn-primary">➕ Добавить услугу</a>
- </div>
+  </div>
 
   <ul>
     {% for service in services %}
       <li>
-       {{ service.title }} —
-       <span class="service-title">{{ service.title }}</span> —
+       <span class="service-title">{{ service.title }}</span>
         <a href="{% url 'edit_service' service.id %}">✏️</a>
         <a href="{% url 'delete_service' service.id %}">🗑️</a>
       </li>
@@ -19,5 +23,7 @@
      <li class="empty-state-item">Нет услуг</li>
     {% endfor %}
   </ul>
+ <br>
+ <a href="{% url 'admin_dashboard' %}" class="back-link">← Назад к панели администратора</a>
  </div>
 {% endblock %}

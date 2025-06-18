@@ -12,8 +12,11 @@
           </li>
         {% endfor %}
       </ul>
+        <br>
+        <a href="{% url 'admin_dashboard' %}" class="back-link">← Назад к панели администратора</a>
     {% else %}
       <p>Заказов пока нет.</p>
     {% endif %}
   </div>
 {% endblock %}
+

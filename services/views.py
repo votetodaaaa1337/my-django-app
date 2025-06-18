@@ -2,9 +2,6 @@ from django.shortcuts import render
 from django.db.models import Q
 from services.models import Service
 
-from django.db.models import Q
-from services.models import Service
-
 def services_list(request):
     query = request.GET.get('q', '')
     min_price = request.GET.get('min_price')
@@ -24,8 +21,16 @@ def services_list(request):
     if max_price:
         services = services.filter(price__lte=max_price)
 
+    category_labels = dict(Service.CATEGORY_CHOICES)
+
+    services_by_category = []
+    for key, label in category_labels.items():
+        filtered_services = services.filter(category=key)
+        if filtered_services.exists():
+            services_by_category.append((label, filtered_services))
+
     context = {
-        'services': services,
+        'services_by_category': services_by_category,
         'query': query,
         'min_price': min_price,
         'max_price': max_price,
